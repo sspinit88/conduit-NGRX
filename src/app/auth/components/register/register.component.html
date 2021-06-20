@@ -1,4 +1,4 @@
-<div *ngIf="isReady"
+<div *ngIf="formIsReady"
      class="auth-page">
   <div class="container page">
     <div class="row">
@@ -7,7 +7,9 @@
         <p class="text-xs-center">
           <a [routerLink]="['/login']">Have an account?</a>
         </p>
-        BackendErrors are here
+        <app-backend-error-msg *ngIf="(backEndErrors$ | async) as backendErrors"
+                               [backendErrors]="backendErrors">
+        </app-backend-error-msg>
         <form [formGroup]="form"
               (ngSubmit)="onSubmit()">
           <fieldset>
@@ -36,6 +38,7 @@
             </fieldset>
             <button
               type="submit"
+              [disabled]="(isSubmitting$ | async)"
               class="btn btn-lg btn-primary pull-xs-right">
               Sign up
             </button>
