@@ -45,7 +45,7 @@ export class LoginEffect {
 
   redirectAfterLogin$ = createEffect(() => this.actions$.pipe(
     ofType(loginSuccessAction),
-    tap(() => this.router.navigate([`${this.path.start.url}`]))
+    tap(() => this.router.navigate([`${this.path.home.url}`]))
     ),
     { dispatch: false });
 

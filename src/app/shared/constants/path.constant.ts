@@ -1,5 +1,5 @@
 export const PATH = {
-  start: {
+  home: {
     url: '/',
   },
   register: {

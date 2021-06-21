@@ -40,7 +40,7 @@ export class RegisterEffect {
   redirectAfterSubmit$ = createEffect(() => this.actions$
       .pipe(
         ofType(registerSuccessAction),
-        tap(() => this.router.navigate([`${this.path.start.url}`]))
+        tap(() => this.router.navigate([`${this.path.home.url}`]))
       ),
     { dispatch: false });
 
