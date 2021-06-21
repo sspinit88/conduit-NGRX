@@ -16,9 +16,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 
 import { PATH } from '../shared/constants/path.constant';
+import { GetCurrentUserEffect } from './store/effects/get-current-user.effect';
 
 const itemComponents = [
-  RegisterComponent
+  RegisterComponent,
+  LoginComponent,
 ];
 
 const routes: Routes = [
@@ -37,7 +39,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ...itemComponents,
-    LoginComponent,
+
   ],
   imports: [
     CommonModule,
@@ -51,6 +53,7 @@ const routes: Routes = [
       .forFeature([
         RegisterEffect,
         LoginEffect,
+        GetCurrentUserEffect,
       ]),
   ],
   exports: [

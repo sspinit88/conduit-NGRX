@@ -23,16 +23,21 @@ export class AuthService {
   }
 
   get baseUrl(): string {
-    return `${environment.apiUrl}/users`
+    return environment.apiUrl
   }
 
   register(data: RegisterRequest): Observable<CurrentUser> {
-    return this.http.post<AuthResponse>(this.baseUrl, data)
+    return this.http.post<AuthResponse>(this.baseUrl + '/users', data)
       .pipe(map(this.getUser));
   }
 
   login(data: LoginRequest): Observable<CurrentUser> {
-    return this.http.post<AuthResponse>(this.baseUrl + '/login', data)
+    return this.http.post<AuthResponse>(this.baseUrl + '/users/login', data)
+      .pipe(map(this.getUser));
+  }
+
+  getCurrentUser(): Observable<CurrentUser> {
+    return this.http.get<AuthResponse>(this.baseUrl + '/user')
       .pipe(map(this.getUser));
   }
 

@@ -64,6 +64,10 @@ export class LoginComponent
   }
 
   onSubmit(): void {
+    if (this.form.invalid) {
+      return;
+    }
+
     const user: Auth = { ...this.form.value };
     const request: LoginRequest = { user };
 

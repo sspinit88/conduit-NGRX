@@ -34,6 +34,9 @@ export class LoginEffect {
       return this.authService.login(request).pipe(
         map((currentUser: CurrentUser) => {
           this.persistenceService.set('token', currentUser.token);
+
+          debugger
+
           return loginSuccessAction({ currentUser });
         }),
         catchError((errResponse: HttpErrorResponse) => {
@@ -45,7 +48,9 @@ export class LoginEffect {
 
   redirectAfterLogin$ = createEffect(() => this.actions$.pipe(
     ofType(loginSuccessAction),
-    tap(() => this.router.navigate([`${this.path.home.url}`]))
+    tap(() => {
+      this.router.navigate([`${this.path.home.url}`])
+    })
     ),
     { dispatch: false });
 
