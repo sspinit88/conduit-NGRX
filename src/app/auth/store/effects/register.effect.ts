@@ -12,8 +12,12 @@ import { AuthService } from '../../services/auth.service';
 import { CurrentUser } from '../../../shared/types/current-user.interface';
 import { Router } from '@angular/router';
 
+import { PATH } from 'src/app/shared/constants/path.constant';
+
 @Injectable()
 export class RegisterEffect {
+  path: typeof PATH = PATH;
+
   register$ = createEffect(() => this.actions$
     .pipe(
       // фильтруем action
@@ -36,9 +40,7 @@ export class RegisterEffect {
   redirectAfterSubmit$ = createEffect(() => this.actions$
       .pipe(
         ofType(registerSuccessAction),
-        tap(() => {
-          this.router.navigate(['/']);
-        })
+        tap(() => this.router.navigate([`${this.path.start.url}`]))
       ),
     { dispatch: false });
 

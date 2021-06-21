@@ -8,4 +8,6 @@ export interface FormCreate {
   initializeForm(): void;
 
   changeFormIsReadyTo(value: boolean): void;
+
+  onSubmit(): void;
 }

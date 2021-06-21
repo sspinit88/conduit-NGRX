@@ -12,6 +12,7 @@ import { RegisterRequest } from '../../types/register-request.interface';
 import { Auth } from '../../types/auth.interface';
 
 import { BackendError } from '../../../shared/types/backend-error.interface';
+import { PATH } from '../../../shared/constants/path.constant';
 
 @Component({
   selector: 'app-register',
@@ -28,6 +29,8 @@ export class RegisterComponent
 
   isSubmitting$: Observable<boolean>;
   backEndErrors$: Observable<BackendError | null>;
+
+  path: typeof PATH = PATH;
 
   constructor(
     private fb: FormBuilder,

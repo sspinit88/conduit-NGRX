@@ -9,6 +9,7 @@ import { RegisterRequest } from '../types/register-request.interface';
 import { CurrentUser } from '../../shared/types/current-user.interface';
 
 import { AuthResponse } from '../types/auth-response.interface';
+import { LoginRequest } from '../types/login.interface';
 
 
 @Injectable({
@@ -27,8 +28,15 @@ export class AuthService {
 
   register(data: RegisterRequest): Observable<CurrentUser> {
     return this.http.post<AuthResponse>(this.baseUrl, data)
-      .pipe(
-        map((res: AuthResponse) => res.user),
-      );
+      .pipe(map(this.getUser));
+  }
+
+  login(data: LoginRequest): Observable<CurrentUser> {
+    return this.http.post<AuthResponse>(this.baseUrl + '/login', data)
+      .pipe(map(this.getUser));
+  }
+
+  getUser(response: AuthResponse): CurrentUser {
+    return response.user;
   }
 }
