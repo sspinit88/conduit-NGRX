@@ -14,24 +14,21 @@
       <!-- залогиненный пользователь -->
       <ng-container *ngIf="isLoggedIn$ | async">
         <li class="nav-item">
-          <!--FIXME /articles/new-->
-          <a [routerLink]="['/articles/new']"
+          <a [routerLink]="['/' + path.articles.children.newArticles.url]"
              class="nav-link">
             <i class="ion-compose"></i>
             &nbsp; New Post
           </a>
         </li>
         <li class="nav-item">
-          <!--FIXME /settings-->
-          <a [routerLink]="['/settings']"
+          <a [routerLink]="['/' + path.settings.url]"
              class="nav-link">
             <i class="ion-compose"></i>
             &nbsp; Settings
           </a>
         </li>
         <li class="nav-item">
-          <!--FIXME /profiles-->
-          <a [routerLink]="['/profiles', (currentUser$ | async)?.username]"
+          <a [routerLink]="['/' + path.profiles.url, (currentUser$ | async)?.username]"
              class="nav-link">
             <img [src]="(currentUser$ | async)?.image"
                  class="user-pic">
