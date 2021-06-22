@@ -1,0 +1,40 @@
+<div *ngIf="(feed$ | async) as feed">
+  <div *ngFor="let article of feed?.articles"
+       class="article-preview">
+    <div class="article-meta">
+      <a [routerLink]="['/'+ path.articles.url, article.author.username]">
+        <img [src]="article.author.image">
+      </a>
+      <div class="info">
+        <a [routerLink]="['/'+ path.articles.url, article.author.username]">
+          {{ article.author.username }}
+        </a>
+        <span class="data">
+          {{ article.createdAt }}
+        </span>
+      </div>
+      <div class="pull-xs-right">
+        ADD TO FAVORITES
+      </div>
+    </div>
+    <a [routerLink]="['/'+ path.articles.url, article.slug]"
+       class="preview-link">
+      <h1>
+        {{ article.title }}
+      </h1>
+      <p>
+        {{ article.description }}
+      </p>
+      HERE IS LIST OF TAGS
+    </a>
+  </div>
+  PAGINATION
+</div>
+
+<app-loading *ngIf="isLoading$ | async">
+</app-loading>
+
+<div *ngIf="(error$ | async) as error">
+  <app-error-message [error]="error">
+  </app-error-message>
+</div>
