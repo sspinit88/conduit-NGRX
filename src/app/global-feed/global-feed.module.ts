@@ -14,6 +14,7 @@ import { FeedComponent } from './components/feed/feed.component';
 import { BannerModule } from '../shared/components/banner/banner.module';
 import { ErrorMessageModule } from '../shared/components/error-message/error-message.module';
 import { LoadingModule } from '../shared/components/loading/loading.module';
+import { PaginationModule } from '../shared/components/pagination/pagination.module';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
     BannerModule,
     ErrorMessageModule,
     LoadingModule,
+    PaginationModule,
   ],
   exports: [
     RouterModule,

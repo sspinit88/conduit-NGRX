@@ -3,6 +3,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { getFeedAction, getFeedFailureAction, getFeedSuccessAction } from './actions/get-feed.action';
 
 import { FeedState } from '../types/feed-state.interface';
+import { routerNavigatedAction } from '@ngrx/router-store';
 
 
 const initialState: FeedState = {
@@ -33,6 +34,14 @@ const feedReducer = createReducer(
     (state): FeedState => ({
       ...state,
       isLoading: false,
+    })
+  ),
+  // TODO пример применения ngrx router
+  on(
+    routerNavigatedAction,
+    (): FeedState => ({
+      ...initialState,
+      isLoading: true
     })
   ),
 );

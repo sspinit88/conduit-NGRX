@@ -1,13 +1,20 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs/internal/Observable';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
+import { Observable } from 'rxjs/internal/Observable';
+import { Subscription } from 'rxjs';
+
+import { select, Store } from '@ngrx/store';
 import { feedDataSelector, feedErrorSelector, isLoadingSelector } from '../../store/effects/selectors';
 import { getFeedAction } from '../../store/actions/get-feed.action';
 
+import { parseUrl, stringify } from 'query-string';
+
+import { PATH } from 'src/app/shared/constants/path.constant';
+import { environment } from '../../../../environments/environment';
+
 import { InitStateValue } from '../../../shared/interfaces/initStateValue.interface';
 import { FeedResponse } from '../../types/feed-response.interface';
-import { PATH } from 'src/app/shared/constants/path.constant';
 
 @Component({
   selector: 'app-feed',
@@ -16,6 +23,7 @@ import { PATH } from 'src/app/shared/constants/path.constant';
 })
 export class FeedComponent
   implements OnInit,
+    OnDestroy,
     InitStateValue {
 
   @Input('apiUrl') apiUrlProps: string;
@@ -23,27 +31,62 @@ export class FeedComponent
   isLoading$: Observable<boolean>;
   error$: Observable<string | null>;
   feed$: Observable<FeedResponse | null>
+  queryParamsSubscription: Subscription;
 
   path: typeof PATH = PATH;
+  apiUrl: string = '/articles';
+  baseUrl: string = '';
+  limit: number = environment.limit;
+  currentPage: number;
 
   constructor(
-    private store: Store
+    private store: Store,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {
   }
 
   ngOnInit(): void {
     this.initializeValue();
-    this.fetchData();
+    this.initializeListeners();
+  }
+
+  ngOnDestroy(): void {
+    if (this.queryParamsSubscription) {
+      this.queryParamsSubscription.unsubscribe();
+    }
   }
 
   initializeValue(): void {
     this.isLoading$ = this.store.pipe(select(isLoadingSelector));
     this.error$ = this.store.pipe(select(feedErrorSelector));
     this.feed$ = this.store.pipe(select(feedDataSelector));
+    this.baseUrl = this.router.url.split('?')[0];
   }
 
+  initializeListeners(): void {
+    this.queryParamsSubscription = this.activatedRoute
+      .queryParams
+      .subscribe((params: Params) => {
+        this.currentPage = Number(params.page || '1');
+        this.fetchData();
+      })
+  };
+
   fetchData(): void {
-    this.store.dispatch(getFeedAction({ url: this.apiUrlProps }));
+    // TODO высчитываем offset
+    const offset = this.currentPage * this.limit - this.limit;
+    const parseItmUrl = parseUrl(this.apiUrlProps);
+
+    const stringifyParams = stringify({
+      limit: this.limit,
+      offset,
+      ...parseItmUrl.query
+    });
+
+    const apiUrlWithParams = `${parseItmUrl.url}?${stringifyParams}`
+
+    this.store.dispatch(getFeedAction({ url: apiUrlWithParams }));
   }
 
 }

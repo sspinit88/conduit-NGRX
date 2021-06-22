@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 
 import { HeaderModule } from './shared/components/header/header.module';
 
@@ -23,8 +24,11 @@ import { AuthInterceptor } from './shared/services/auth.interceptor.service';
     AppRoutingModule,
     HttpClientModule,
     HeaderModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({
+      router: routerReducer,
+    }),
     EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule
       .instrument({
         maxAge: 25, // Retains last 25 states

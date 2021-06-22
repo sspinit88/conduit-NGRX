@@ -3,7 +3,8 @@
        class="article-preview">
     <div class="article-meta">
       <a [routerLink]="['/'+ path.articles.url, article.author.username]">
-        <img [src]="article.author.image">
+        <img [src]="article.author.image"
+             alt="">
       </a>
       <div class="info">
         <a [routerLink]="['/'+ path.articles.url, article.author.username]">
@@ -28,7 +29,11 @@
       HERE IS LIST OF TAGS
     </a>
   </div>
-  PAGINATION
+  <app-pagination [total]="feed.articlesCount"
+                  [limit]="limit"
+                  [url]="baseUrl"
+                  [currentPage]="currentPage">
+  </app-pagination>
 </div>
 
 <app-loading *ngIf="isLoading$ | async">
