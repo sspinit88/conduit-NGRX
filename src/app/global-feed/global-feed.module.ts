@@ -16,6 +16,7 @@ import { ErrorMessageModule } from '../shared/components/error-message/error-mes
 import { LoadingModule } from '../shared/components/loading/loading.module';
 import { PaginationModule } from '../shared/components/pagination/pagination.module';
 import { TagListModule } from '../shared/components/tag-list/tag-list.module';
+import { PopularTagsModule } from '../shared/components/popular-tags/popular-tags.module';
 
 const routes: Routes = [
   {
@@ -43,6 +44,7 @@ const routes: Routes = [
     LoadingModule,
     PaginationModule,
     TagListModule,
+    PopularTagsModule
   ],
   exports: [
     RouterModule,

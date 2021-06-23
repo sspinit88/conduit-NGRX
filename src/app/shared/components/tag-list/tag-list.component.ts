@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { PopularTagType } from '../../types/popular-tag-type.type';
 
@@ -7,15 +7,11 @@ import { PopularTagType } from '../../types/popular-tag-type.type';
   templateUrl: './tag-list.component.html',
   styleUrls: ['./tag-list.component.scss']
 })
-export class TagListComponent
-  implements OnInit {
+export class TagListComponent {
 
   @Input('tags') tagsProps: PopularTagType[] = [];
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
 }
