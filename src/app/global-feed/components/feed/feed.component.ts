@@ -34,7 +34,6 @@ export class FeedComponent
   queryParamsSubscription: Subscription;
 
   path: typeof PATH = PATH;
-  apiUrl: string = '/articles';
   baseUrl: string = '';
   limit: number = environment.limit;
   currentPage: number;
@@ -69,6 +68,7 @@ export class FeedComponent
       .queryParams
       .subscribe((params: Params) => {
         this.currentPage = Number(params.page || '1');
+
         this.fetchData();
       })
   };

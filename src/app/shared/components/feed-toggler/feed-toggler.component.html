@@ -8,7 +8,11 @@
     </a>
   </li>
   <li class="nav-item">
+    <!-- todo [routerLinkActiveOptions]="{exact: true} => Значение {exact:true} указывает на то, что для установки
+    активной ссылки будет применяться полное
+    соответствие:-->
     <a [routerLink]="['/']"
+       [routerLinkActiveOptions]="{exact: true}"
        routerLinkActive="active"
        class="nav-link">
       Global feed

@@ -46,12 +46,14 @@ export class LoginEffect {
     })
   ));
 
+  // TODO реализуем редирект при успешном ответе
   redirectAfterLogin$ = createEffect(() => this.actions$.pipe(
     ofType(loginSuccessAction),
     tap(() => {
       this.router.navigate([`${this.path.home.url}`])
-    })
+    }),
     ),
-    { dispatch: false });
+    { dispatch: false }
+  );
 
 }

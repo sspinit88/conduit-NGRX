@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./global-feed/global-feed.module').then(m => m.GlobalFeedModule),
+  },
+  {
+    path: 'article',
+    loadChildren: () => import('./article/article.module').then(m => m.ArticleModule),
   }
 ];
 

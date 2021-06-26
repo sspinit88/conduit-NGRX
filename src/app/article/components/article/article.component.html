@@ -1,0 +1,69 @@
+<div *ngIf="!(isLoading$ | async); else loading"
+     class="article-content-wrapper">
+
+  <div *ngIf="(article$ | async) as article"
+       class="article-page">
+
+    <div class="banner">
+      <div class="container">
+        <h1>
+          {{ article.title }}
+        </h1>
+
+        <div class="article-meta">
+          <a [routerLink]="['/profiles', article.author.username]">
+            <img [src]="article.author.image"
+                 alt="">
+          </a>
+          <div class="info">
+            <a [routerLink]="['/profiles', article.author.username]">
+              {{ article.author.username }}
+            </a>
+            <span class="date">
+              {{ article.createdAt }}
+            </span>
+          </div>
+
+          <span *ngIf="(isAuthor$ | async)">
+            <a [routerLink]="['/articles', article.slug, 'edit']"
+               class="btn  btn-outline-secondary rtn-sm">
+                <i class="ion-edit"></i>
+              Edit article
+            </a>
+            <button (click)="deleteArticle()"
+                    class="btn btn-outline-danger btn-sm">
+              Delete Article
+            </button>
+          </span>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container page">
+      <div class="row article-content">
+        <div class="col-xs-12">
+          <div>
+            <p>
+              {{ article.body }}
+            </p>
+            <app-tag-list [tags]="article.tagList">
+            </app-tag-list>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <app-loading>
+  </app-loading>
+</ng-template>
+
+<app-error-message *ngIf="(error$ | async)">
+</app-error-message>
+

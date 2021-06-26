@@ -50,6 +50,7 @@ const routes: Routes = [
   ],
   exports: [
     RouterModule,
+    FeedComponent,
   ]
 })
 export class GlobalFeedModule {
