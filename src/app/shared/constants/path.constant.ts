@@ -19,11 +19,11 @@ export const PATH = {
     title: 'Profiles',
   },
   articles: {
-    url: 'articles',
+    url: 'article',
     title: 'articles',
     children: {
       newArticles: {
-        url: 'articles/new',
+        url: 'article/new',
         title: 'New Articles'
       }
     }

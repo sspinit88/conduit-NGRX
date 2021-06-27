@@ -14,17 +14,44 @@ import { ErrorMessageModule } from '../shared/components/error-message/error-mes
 import { TagListModule } from '../shared/components/tag-list/tag-list.module';
 
 import { ArticleComponent } from './components/article/article.component';
+import { CreateArticleComponent } from './components/create-article/create-article.component';
+import { ArticleSrcComponent } from './components/article-src/article-src.component';
+import { EditArticleComponent } from './components/edit-article/edit-article.component';
+import { ArticleFormComponent } from './components/article-form/article-form.component';
+import { BackendErrorMsgModule } from '../shared/components/backend-error-msg/beckend-error-msg.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CreateArticleEffect } from './store/effects/create-article.effect';
+import { UpdateArticleEffect } from './store/effects/update-article.effect';
 
 const routes: Routes = [
   {
-    path: ':slug',
-    component: ArticleComponent
-  }
+    path: '',
+    component: ArticleSrcComponent,
+    children: [
+      {
+        path: 'new',
+        component: CreateArticleComponent
+      },
+      {
+        path: 'edit/:slug',
+        component: EditArticleComponent
+      },
+      {
+        path: ':slug',
+        component: ArticleComponent
+      }
+    ],
+  },
+
 ];
 
 @NgModule({
   declarations: [
-    ArticleComponent
+    ArticleComponent,
+    CreateArticleComponent,
+    ArticleSrcComponent,
+    EditArticleComponent,
+    ArticleFormComponent
   ],
   imports: [
     CommonModule,
@@ -33,10 +60,14 @@ const routes: Routes = [
     EffectsModule.forFeature([
       GetArticleEffect,
       DeleteArticleEffect,
+      CreateArticleEffect,
+      UpdateArticleEffect,
     ]),
     LoadingModule,
     ErrorMessageModule,
-    TagListModule
+    TagListModule,
+    BackendErrorMsgModule,
+    ReactiveFormsModule
   ],
   exports: [
     RouterModule,

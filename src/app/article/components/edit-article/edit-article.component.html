@@ -1,0 +1,4 @@
+<app-article-form *ngIf="(initialValues$ | async) as initialValue"
+                  [initialValues]="initialValue"
+                  (articleSubmit)="onSubmit($event)">
+</app-article-form>
