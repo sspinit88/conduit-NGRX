@@ -10,6 +10,7 @@ import { CurrentUser } from '../../shared/types/current-user.interface';
 
 import { AuthResponse } from '../types/auth-response.interface';
 import { LoginRequest } from '../types/login.interface';
+import { CurrentUserInput } from 'src/app/shared/types/current-user-input.interface';
 
 
 @Injectable({
@@ -43,5 +44,12 @@ export class AuthService {
 
   getUser(response: AuthResponse): CurrentUser {
     return response.user;
+  }
+
+  updateCurrentUser(currentUserInput: CurrentUserInput): Observable<CurrentUser> {
+    const url = environment.apiUrl + '/user';
+
+    return this.http.put<AuthResponse>(url, currentUserInput)
+      .pipe(map(this.getUser));
   }
 }

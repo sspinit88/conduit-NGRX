@@ -34,9 +34,6 @@ export class LoginEffect {
       return this.authService.login(request).pipe(
         map((currentUser: CurrentUser) => {
           this.persistenceService.set('token', currentUser.token);
-
-          debugger
-
           return loginSuccessAction({ currentUser });
         }),
         catchError((errResponse: HttpErrorResponse) => {

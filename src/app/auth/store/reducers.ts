@@ -8,6 +8,7 @@ import {
   getCurrentUserFailureAction,
   getCurrentUserSuccessAction
 } from './actions/get-current-user.action';
+import { updateCurrentUserSuccessAction } from './actions/uodate-current-user.action';
 
 const initialState: AuthState = {
   isSubmitting: false,
@@ -93,6 +94,13 @@ const authReducer = createReducer(
       isLoading: false,
       isLoginIn: false,
       currentUser: null,
+    })
+  ),
+  on(
+    updateCurrentUserSuccessAction,
+    (state, action): AuthState => ({
+      ...state,
+      currentUser: action.currentUser,
     })
   ),
 );
