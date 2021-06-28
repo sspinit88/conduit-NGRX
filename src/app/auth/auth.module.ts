@@ -18,6 +18,7 @@ import { RegisterEffect } from './store/effects/register.effect';
 import { LoginEffect } from './store/effects/login.effect';
 import { GetCurrentUserEffect } from './store/effects/get-current-user.effect';
 import { UpdateCurrentUserEffect } from './store/effects/update-current-user.effect';
+import { LogoutEffect } from './store/effects/logout.effect';
 
 const itemComponents = [
   RegisterComponent,
@@ -56,6 +57,7 @@ const routes: Routes = [
         LoginEffect,
         GetCurrentUserEffect,
         UpdateCurrentUserEffect,
+        LogoutEffect,
       ]),
   ],
   exports: [

@@ -103,6 +103,15 @@ const authReducer = createReducer(
       currentUser: action.currentUser,
     })
   ),
+  on(
+    // TODO logout
+    loginAction,
+    (state): AuthState => ({
+      ...state,
+      ...initialState,
+      isLoginIn: false,
+    })
+  ),
 );
 
 export function reducers(state: AuthState, action: Action) {
