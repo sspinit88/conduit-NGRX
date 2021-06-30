@@ -18,6 +18,7 @@ import { PaginationModule } from '../shared/components/pagination/pagination.mod
 import { TagListModule } from '../shared/components/tag-list/tag-list.module';
 import { PopularTagsModule } from '../shared/components/popular-tags/popular-tags.module';
 import { FeedTogglerModule } from '../shared/components/feed-toggler/feed-toggler.module';
+import { AddToFavoritesModule } from '../shared/components/add-to-favorites/add-to-favorites.module';
 
 const routes: Routes = [
   {
@@ -46,7 +47,8 @@ const routes: Routes = [
     PaginationModule,
     TagListModule,
     PopularTagsModule,
-    FeedTogglerModule
+    FeedTogglerModule,
+    AddToFavoritesModule
   ],
   exports: [
     RouterModule,
