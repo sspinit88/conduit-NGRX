@@ -1,5 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+import { Store } from '@ngrx/store';
+
+import { addToFavoritesAction } from '../../store/actions/add-to-favorites.action';
+
 @Component({
   selector: 'app-add-to-favorites',
   templateUrl: './add-to-favorites.component.html',
@@ -15,7 +19,9 @@ export class AddToFavoritesComponent
   favoritesCount: number;
   isFavorited: boolean;
 
-  constructor() {
+  constructor(
+    private store: Store,
+  ) {
   }
 
   ngOnInit(): void {
@@ -24,6 +30,8 @@ export class AddToFavoritesComponent
   }
 
   handleLike(): void {
+    this.store.dispatch(addToFavoritesAction({ isFavorited: this.isFavorited, slug: this.articleSlugProps }));
+
     if (this.isFavorited) {
       this.favoritesCount = this.favoritesCount - 1;
     } else {
